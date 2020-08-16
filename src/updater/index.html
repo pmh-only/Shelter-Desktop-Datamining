@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter</title>
+    <style>
+        html, body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            z-index: 1;
+            position: relative;
+            -webkit-user-select: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-app-region: drag;
+        }
+
+        .updater {
+            margin: 16px;
+        }
+
+        h1, p {
+            position: relative;
+            margin: 0;
+            z-index: 3;
+        }
+
+        h1 {
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+
+        .lottie {
+            position: absolute;
+            z-index: 2;
+            color: #fff;
+            width: 120px;
+            height: 120px;
+            top: -23px;
+            right: -23px;
+        }
+
+        .gradient {
+            position: static;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right:0 ;
+            z-index: 99;
+            background: linear-gradient(rgba(21,56,88,.5) -20%,transparent 40%)
+        }
+    </style>
+</head>
+<body>
+    <div class="updater">
+        <div class="lottie"></div>
+        <h1>업데이트중...</h1>
+        <p>잠시만 기다려 주시기 바랍니다.</p>
+        <div class="gradient"></div>
+    </div>
+    <script>
+        const lottie = require('lottie-web');
+        lottie.loadAnimation({
+            container: document.querySelector('.lottie'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '../assets/lottie.json'
+        });
+    </script>
+</body>
+</html>

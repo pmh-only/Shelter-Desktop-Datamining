@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter</title>
+    <style>
+        html, body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            z-index: 1;
+            position: relative;
+            -webkit-user-select: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-app-region: drag;
+        }
+
+        .updater {
+            margin: 16px;
+        }
+
+        h1, p {
+            position: relative;
+            margin: 0;
+            z-index: 3;
+        }
+
+        h1 {
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+
+        .close {
+            width: 12px;
+            height: 12px;
+            display: block;
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            z-index: 8;
+            -webkit-app-region: no-drag;
+        }
+
+        .close img {
+            display: block;
+        }
+
+        .btn-con {
+            display: flex;
+            margin-top: 10px;
+            -webkit-app-region: no-drag;
+        }
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            background-color: #242628;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        .btn.ok {
+            background-color: #60a0e0;
+            color: white;
+        }
+
+        .spacer {
+            width: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="updater">
+        <a href="#" onclick="later();return false;" class="close"><img src="../assets/icon_desktop_close.png" /></a>
+        <h1>쉘터 클라이언트의 새로운 버전이 있습니다.</h1>
+        <div class="btn-con">
+            <a class="btn ok" href="#" onclick="ok();return false;">지금 업데이트</a>
+            <div class="spacer"></div>
+            <a class="btn" href="#" onclick="later();return false;">다시 알림</a>
+        </div>
+    </div>
+    <script>
+         const remote = require('electron').remote;
+
+        function ok() {
+            remote.getCurrentWindow().doUpdate();
+        }
+
+        function later() {
+            remote.getCurrentWindow().later();
+        }
+    </script>
+</body>
+</html>

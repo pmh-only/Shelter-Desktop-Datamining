@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            -webkit-user-select: none;
+            background: none;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            height: 100vh;
+            width: 100vw;
+            border-radius: 6px;
+            background-color: #000;
+        }
+
+        .lottie {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            left: 50%;
+            margin-left: -150px;
+            top: 50%;
+            margin-top: -150px;
+            filter: brightness(1);
+        }
+
+        .warn {
+            display: none;
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        .warn.on {
+            display: block;
+        }
+
+        .warn a {
+            display: block;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        body.white .wrapper {
+            background-color: #fbfdff;
+        }
+
+        body.white .lottie {
+            filter: brightness(0) opacity(0.8);
+        }
+
+        body.white .warn {
+            color: #444;
+        }
+
+        body.white .warn a {
+            color: black;
+        }
+    </style>
+</head>
+<body class="">
+    <div class="wrapper">
+        <div class="lottie"></div>
+        <div class="warn">
+            <p>연결이 지연되고 있습니다...</p>
+            <a href="#" onclick="restart(); return false;">재시도</a>
+        </div>
+    </div>
+    <script>
+        const remote = require('electron').remote;
+        const defaultSkinTone = remote.getCurrentWindow().defaultSkinTone;
+        const lottie = require('lottie-web');
+
+        if (defaultSkinTone === 'WHITE') {
+            document.querySelector('body').classList.add('white')
+        }
+
+        lottie.loadAnimation({
+            container: document.querySelector('.lottie'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '../assets/lottie.json'
+        });
+
+        function restart() {
+            var currentWindow = remote.getCurrentWindow();
+            currentWindow.restartApp();
+        }
+
+        if (!navigator.onLine) {
+            document.querySelector('.warn').classList.add("on");
+        }
+
+        setTimeout(() => {
+            document.querySelector('.warn').classList.add("on");
+        }, 10000)
+    </script>
+</body>
+</html>
